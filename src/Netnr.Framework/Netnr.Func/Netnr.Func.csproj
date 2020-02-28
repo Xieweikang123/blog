@@ -7,6 +7,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>Netnr.Func.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentScheduler" Version="5.3.0" />

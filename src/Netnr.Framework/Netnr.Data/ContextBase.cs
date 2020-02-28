@@ -1,3 +1,4 @@
+using log4net;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -26,7 +27,13 @@ namespace Netnr.Data
 
         public ContextBase()
         {
-            Enum.TryParse(GlobalTo.GetValue("TypeDB"), true, out TDB);
+
+            if (!Enum.TryParse(GlobalTo.GetValue("TypeDB"), true, out TDB))
+            {
+                //this.log = LogManager.GetLogger(, typeof(ContextBase));
+                //log.Error($"不存在此TypeDB:{TDB}");
+                //Core.ConsoleTo.Log($"不存在此TypeDB:{TDB}");
+            }
         }
 
         public ContextBase(DbContextOptions<ContextBase> options) : base(options)
@@ -77,6 +84,9 @@ namespace Netnr.Data
                         break;
                     case TypeDB.PostgreSQL:
                         optionsBuilder.UseNpgsql(GlobalTo.GetValue("ConnectionStrings:PostgreSQLConn"));
+                        break;
+                    default:
+                        Core.ConsoleTo.Log($"不存在此TypeDB:{TDB}");
                         break;
                 }
 

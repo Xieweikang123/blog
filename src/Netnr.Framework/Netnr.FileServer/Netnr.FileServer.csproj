@@ -7,6 +7,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>Netnr.FileServer.xml</DocumentationFile>
   </PropertyGroup>
+  <PropertyGroup>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  
 
   <ItemGroup>
     <Content Remove="wwwroot\README.md" />

@@ -10,72 +10,95 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using log4net.Repository;
+using System.IO;
+using log4net;
+using log4net.Config;
+using System.Configuration;
+using System;
 
 namespace Netnr.Web
 {
     public class Startup
     {
+        public static ILoggerRepository repository { get; set; }
+        private ILog log;
         public Startup(IConfiguration configuration, IHostEnvironment env)
         {
-            GlobalTo.Configuration = configuration;
-            GlobalTo.HostEnvironment = env;
-
-            #region 第三方登录
-            QQConfig.APPID = GlobalTo.GetValue("OAuthLogin:QQ:APPID");
-            QQConfig.APPKey = GlobalTo.GetValue("OAuthLogin:QQ:APPKey");
-            QQConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:QQ:Redirect_Uri");
-
-            WeiboConfig.AppKey = GlobalTo.GetValue("OAuthLogin:Weibo:AppKey");
-            WeiboConfig.AppSecret = GlobalTo.GetValue("OAuthLogin:Weibo:AppSecret");
-            WeiboConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:Weibo:Redirect_Uri");
-
-            GitHubConfig.ClientID = GlobalTo.GetValue("OAuthLogin:GitHub:ClientID");
-            GitHubConfig.ClientSecret = GlobalTo.GetValue("OAuthLogin:GitHub:ClientSecret");
-            GitHubConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:GitHub:Redirect_Uri");
-            GitHubConfig.ApplicationName = GlobalTo.GetValue("OAuthLogin:GitHub:ApplicationName");
-
-            TaoBaoConfig.AppKey = GlobalTo.GetValue("OAuthLogin:TaoBao:AppKey");
-            TaoBaoConfig.AppSecret = GlobalTo.GetValue("OAuthLogin:TaoBao:AppSecret");
-            TaoBaoConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:TaoBao:Redirect_Uri");
-
-            MicroSoftConfig.ClientID = GlobalTo.GetValue("OAuthLogin:MicroSoft:ClientID");
-            MicroSoftConfig.ClientSecret = GlobalTo.GetValue("OAuthLogin:MicroSoft:ClientSecret");
-            MicroSoftConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:MicroSoft:Redirect_Uri");
-
-            DingTalkConfig.appId = GlobalTo.GetValue("OAuthLogin:DingTalk:AppId");
-            DingTalkConfig.appSecret = GlobalTo.GetValue("OAuthLogin:DingTalk:AppSecret");
-            DingTalkConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:DingTalk:Redirect_Uri");
-            #endregion
-
-            //无创建，有忽略
-            using var db = new Data.ContextBase();
-            if (db.Database.EnsureCreated())
+            try
             {
-                var jodb = Core.FileTo.ReadText(GlobalTo.WebRootPath + "/scripts/example/", "data.json").ToJObject();
+                GlobalTo.Configuration = configuration;
+                GlobalTo.HostEnvironment = env;
 
-                db.UserInfo.AddRange(jodb["UserInfo"].ToString().ToEntitys<Domain.UserInfo>());
+                //log4net
+                repository = LogManager.CreateRepository("NETCoreRepository");
+                // 指定配置文件
+                XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
 
-                db.Tags.AddRange(jodb["Tags"].ToString().ToEntitys<Domain.Tags>());
+                #region 第三方登录
+                QQConfig.APPID = GlobalTo.GetValue("OAuthLogin:QQ:APPID");
+                QQConfig.APPKey = GlobalTo.GetValue("OAuthLogin:QQ:APPKey");
+                QQConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:QQ:Redirect_Uri");
 
-                db.UserWriting.AddRange(jodb["UserWriting"].ToString().ToEntitys<Domain.UserWriting>());
+                WeiboConfig.AppKey = GlobalTo.GetValue("OAuthLogin:Weibo:AppKey");
+                WeiboConfig.AppSecret = GlobalTo.GetValue("OAuthLogin:Weibo:AppSecret");
+                WeiboConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:Weibo:Redirect_Uri");
 
-                db.UserWritingTags.AddRange(jodb["UserWritingTags"].ToString().ToEntitys<Domain.UserWritingTags>());
+                GitHubConfig.ClientID = GlobalTo.GetValue("OAuthLogin:GitHub:ClientID");
+                GitHubConfig.ClientSecret = GlobalTo.GetValue("OAuthLogin:GitHub:ClientSecret");
+                GitHubConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:GitHub:Redirect_Uri");
+                GitHubConfig.ApplicationName = GlobalTo.GetValue("OAuthLogin:GitHub:ApplicationName");
 
-                db.UserReply.AddRange(jodb["UserReply"].ToString().ToEntitys<Domain.UserReply>());
+                TaoBaoConfig.AppKey = GlobalTo.GetValue("OAuthLogin:TaoBao:AppKey");
+                TaoBaoConfig.AppSecret = GlobalTo.GetValue("OAuthLogin:TaoBao:AppSecret");
+                TaoBaoConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:TaoBao:Redirect_Uri");
 
-                db.Run.AddRange(jodb["Run"].ToString().ToEntitys<Domain.Run>());
+                MicroSoftConfig.ClientID = GlobalTo.GetValue("OAuthLogin:MicroSoft:ClientID");
+                MicroSoftConfig.ClientSecret = GlobalTo.GetValue("OAuthLogin:MicroSoft:ClientSecret");
+                MicroSoftConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:MicroSoft:Redirect_Uri");
 
-                db.KeyValues.AddRange(jodb["KeyValues"].ToString().ToEntitys<Domain.KeyValues>());
+                DingTalkConfig.appId = GlobalTo.GetValue("OAuthLogin:DingTalk:AppId");
+                DingTalkConfig.appSecret = GlobalTo.GetValue("OAuthLogin:DingTalk:AppSecret");
+                DingTalkConfig.Redirect_Uri = GlobalTo.GetValue("OAuthLogin:DingTalk:Redirect_Uri");
+                #endregion
 
-                db.Gist.AddRange(jodb["Gist"].ToString().ToEntitys<Domain.Gist>());
+                //无创建，有忽略
+                using var db = new Data.ContextBase();
+                if (db.Database.EnsureCreated())
+                {
+                    var jodb = Core.FileTo.ReadText(GlobalTo.WebRootPath + "/scripts/example/", "data.json").ToJObject();
 
-                db.Draw.AddRange(jodb["Draw"].ToString().ToEntitys<Domain.Draw>());
+                    db.UserInfo.AddRange(jodb["UserInfo"].ToString().ToEntitys<Domain.UserInfo>());
 
-                db.DocSet.AddRange(jodb["DocSet"].ToString().ToEntitys<Domain.DocSet>());
+                    db.Tags.AddRange(jodb["Tags"].ToString().ToEntitys<Domain.Tags>());
 
-                db.DocSetDetail.AddRange(jodb["DocSetDetail"].ToString().ToEntitys<Domain.DocSetDetail>());
+                    db.UserWriting.AddRange(jodb["UserWriting"].ToString().ToEntitys<Domain.UserWriting>());
 
-                db.SaveChanges();
+                    db.UserWritingTags.AddRange(jodb["UserWritingTags"].ToString().ToEntitys<Domain.UserWritingTags>());
+
+                    db.UserReply.AddRange(jodb["UserReply"].ToString().ToEntitys<Domain.UserReply>());
+
+                    db.Run.AddRange(jodb["Run"].ToString().ToEntitys<Domain.Run>());
+
+                    db.KeyValues.AddRange(jodb["KeyValues"].ToString().ToEntitys<Domain.KeyValues>());
+
+                    db.Gist.AddRange(jodb["Gist"].ToString().ToEntitys<Domain.Gist>());
+
+                    db.Draw.AddRange(jodb["Draw"].ToString().ToEntitys<Domain.Draw>());
+
+                    db.DocSet.AddRange(jodb["DocSet"].ToString().ToEntitys<Domain.DocSet>());
+
+                    db.DocSetDetail.AddRange(jodb["DocSetDetail"].ToString().ToEntitys<Domain.DocSetDetail>());
+
+                    db.SaveChanges();
+                }
+
+              
+            }
+            catch (Exception ex)
+            {
+                log = LogManager.GetLogger(Startup.repository.Name, typeof(Startup));
+                log.Error(ex.Message);
             }
         }
 
