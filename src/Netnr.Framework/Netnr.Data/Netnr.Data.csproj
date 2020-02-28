@@ -17,7 +17,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Netnr.Domain\Netnr.Domain.csproj" />
     <ProjectReference Include="..\Netnr.Fast\Netnr.Fast.csproj" />
-    <ProjectReference Include="..\Walker.Core\Walker.Core.csproj" />
   </ItemGroup>
 
 </Project>

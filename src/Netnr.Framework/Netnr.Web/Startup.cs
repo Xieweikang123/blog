@@ -34,6 +34,8 @@ namespace Netnr.Web
                 repository = LogManager.CreateRepository("NETCoreRepository");
                 // 指定配置文件
                 XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
+                log = LogManager.GetLogger(Startup.repository.Name, typeof(Startup));
+
 
                 #region 第三方登录
                 QQConfig.APPID = GlobalTo.GetValue("OAuthLogin:QQ:APPID");
@@ -97,7 +99,6 @@ namespace Netnr.Web
             }
             catch (Exception ex)
             {
-                log = LogManager.GetLogger(Startup.repository.Name, typeof(Startup));
                 log.Error(ex.Message);
             }
         }
