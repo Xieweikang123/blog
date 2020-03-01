@@ -98,6 +98,7 @@
 
     z.Grid.fn = z.Grid.prototype = {
         init: function () {
+            console.log(" z.Grid.fn init ");
             return z.thisInit(this, this.defaultOptions = {
                 isinit: true,/*是初始化*/
                 id: "#Grid1",/*容器#ID*/
@@ -221,7 +222,12 @@
 
                     //点击排序
                     if (typeof that.onSortColumn != "function") {
+
+                        console.log("that:",that);
                         that.onSortColumn = function (sort, order) {
+
+                            console.log("click sort");
+
                             that.sortName = sort;
                             that.sortOrder = order;
                             that.load();

@@ -8,7 +8,7 @@ if (console) {
     var outs = [], fi = function () { return { msg: "", style: "" } };
 
     var oi = fi();
-    oi.msg = "NET牛人";
+    oi.msg = "NETBlog";
     oi.style = "padding:10px 40px 10px;line-height:50px;background:url('https://www.netnr.com/favicon.svg') no-repeat;background-size:15% 100%;font-size:1.8rem;color:#009a61";
     outs.push(oi);
 
@@ -23,7 +23,7 @@ if (console) {
 
     if (!("ActiveXObject" in window)) {
         outs.map(function (x) {
-            console.log("%c" + x.msg, x.style);
+            //console.log("%c" + x.msg, x.style);
         });
     }
 
@@ -31,14 +31,14 @@ if (console) {
     if (window.performance) {
         window.funsi = setInterval(function () {
             var t = performance.timing;
-            if (t.loadEventEnd) {
-                console.table({
-                    load: t.loadEventEnd - t.navigationStart,
-                    ready: t.domComplete - t.responseEnd,
-                    request: t.responseEnd - t.requestStart
-                })
-                clearInterval(window.funsi);
-            }
+            //if (t.loadEventEnd) {
+            //    console.table({
+            //        load: t.loadEventEnd - t.navigationStart,
+            //        ready: t.domComplete - t.responseEnd,
+            //        request: t.responseEnd - t.requestStart
+            //    })
+            //    clearInterval(window.funsi);
+            //}
         }, 10)
     }
 }

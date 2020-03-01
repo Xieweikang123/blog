@@ -3,17 +3,18 @@ gd1.url = "/user/writelist";
 gd1.autosizePid = "#PGrid1";
 gd1.pageSize = 100;
 gd1.multiSort = true;
-gd1.sortName = "UwId";
-gd1.sortOrder = "desc";
+gd1.sortName = "UwId,UwCreateTime,UwUpdateTime";
+gd1.sortOrder = "asc";
+
 gd1.columns = [[
     { title: "ID", field: "UwId", width: 60, sortable: true, align: "center" },
     {
-        title: "标题", field: "UwTitle", width: 660, sortable: true, formatter: function (value, row) {
+        title: "标题", field: "UwTitle", width: 200, sortable: true, formatter: function (value, row) {
             return '<a href="/home/list/' + row.UwId + '" target="_blank">' + value + '</a>';
         }
     },
-    { title: "创建时间", field: "UwCreateTime", width: 150, sortable: true, align: "center" },
-    { title: "更新时间", field: "UwUpdateTime", width: 150, sortable: true, align: "center" },
+    { title: "创建时间", field: "UwCreateTime", width: 180, sortable: true, align: "center" },
+    { title: "更新时间", field: "UwUpdateTime", width: 180, sortable: true, align: "center" },
     { title: "回复", field: "UwReplyNum", width: 60, sortable: true, align: "center" },
     { title: "浏览", field: "UwReadNum", width: 60, sortable: true, align: "center" },
     { title: "点赞", field: "UwLaud", width: 60, sortable: true, align: "center" },

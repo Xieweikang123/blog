@@ -140,8 +140,8 @@ namespace Netnr.Web.Controllers
 
                 var news = new WeChatNews
                 {
-                    title = "NET牛人（Gist,Run,Doc,Draw）",
-                    description = "NET牛人，技术分享博客、代码片段、在线运行代码、接口文档、绘制 等等",
+                    title = "NETBlog（Gist,Run,Doc,Draw）",
+                    description = "NETBlog，技术分享博客、代码片段、在线运行代码、接口文档、绘制 等等",
                     picurl = myPic,
                     url = myDomain
                 };
