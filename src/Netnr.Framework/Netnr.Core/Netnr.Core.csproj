@@ -5,7 +5,7 @@
     <Description>开发常用的核心类库；使用文档看GitHub（Gitee）项目说明。</Description>
     <Copyright>netnr</Copyright>
     <PackageIconUrl></PackageIconUrl>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/netnr/Netnr.ClassLibrary</PackageProjectUrl>
     <RepositoryUrl>https://github.com/netnr/Netnr.ClassLibrary</RepositoryUrl>
     <PackageLicenseUrl></PackageLicenseUrl>

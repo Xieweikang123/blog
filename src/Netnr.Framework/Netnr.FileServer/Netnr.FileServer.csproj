@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Netnr.Core\Netnr.Core.csproj" />
     <ProjectReference Include="..\Netnr.Fast\Netnr.Fast.csproj" />
   </ItemGroup>
 

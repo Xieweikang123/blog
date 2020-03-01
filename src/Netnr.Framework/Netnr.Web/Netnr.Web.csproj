@@ -48,6 +48,7 @@
     <ProjectReference Include="..\Netnr.Func\Netnr.Func.csproj" />
     <ProjectReference Include="..\Netnr.Login\Netnr.Login.csproj" />
     <ProjectReference Include="..\Netnr.WeChat\Netnr.WeChat.csproj" />
+    <ProjectReference Include="..\Walker.Core\Walker.Core.csproj" />
   </ItemGroup>
 
 
@@ -67,6 +68,16 @@
 
   <ItemGroup>
     <Folder Include=".config\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="Netnr.Core">
+      <HintPath>..\Netnr.Core\bin\Debug\netstandard2.1\Netnr.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Walker.Core">
+      <HintPath>..\Walker.Core\bin\Debug\netcoreapp3.1\Walker.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 

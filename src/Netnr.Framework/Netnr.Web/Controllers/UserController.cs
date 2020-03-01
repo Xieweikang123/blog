@@ -653,7 +653,7 @@ namespace Netnr.Web.Controllers
         /// <returns></returns>
         public IActionResult Verify()
         {
-            var vm = new ActionResultVM();
+            ActionResultVM vm = new ActionResultVM();
 
             var id = RouteData.Values["id"]?.ToString().ToUpper();
 
@@ -688,7 +688,7 @@ namespace Netnr.Web.Controllers
                                     }
                                     else
                                     {
-                                        var tml = Core.FileTo.ReadText(GlobalTo.WebRootPath + "/lib/mailchecker/", "list.txt");
+                                        var tml = Walker.Core.FileTo.ReadText(GlobalTo.WebRootPath + "/lib/mailchecker/", "list.txt");
                                         if (tml.Contains(usermo.UserMail.Split('@').LastOrDefault()))
                                         {
                                             vm.msg = "该邮箱已被屏蔽";
@@ -699,16 +699,16 @@ namespace Netnr.Web.Controllers
 
                                             var ToMail = usermo.UserMail;
 
-                                            var vjson = new
+                                            string vjson = new
                                             {
                                                 mail = ToMail,
                                                 ts = DateTime.Now.ToTimestamp()
                                             }.ToJson();
-                                            var vcode = Core.CalcTo.EnDES(vjson, GlobalTo.GetValue("VerifyCode:Key")).ToLower();
+                                            string vcode = Core.CalcTo.EnDES(vjson, GlobalTo.GetValue("VerifyCode:Key")).ToLower();
 
                                             var VerifyLink = string.Format(GlobalTo.GetValue("VerifyCode:Url"), vcode);
 
-                                            var txt = Core.FileTo.ReadText(GlobalTo.WebRootPath + "/template/", "sendmailverify.html");
+                                            string txt = Core.FileTo.ReadText(GlobalTo.WebRootPath + "/template/", "sendmailverify.html");
                                             txt = txt.Replace("@ToMail@", ToMail).Replace("@VerifyLink@", VerifyLink);
 
                                             vm = Func.MailAid.Send(ToMail, "[Netnr] 验证你的邮箱", txt);

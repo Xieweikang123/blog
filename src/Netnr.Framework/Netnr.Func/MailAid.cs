@@ -1,6 +1,7 @@
 ﻿using System;
 using MimeKit;
 using MailKit.Net.Smtp;
+using log4net;
 
 namespace Netnr.Func
 {
@@ -9,6 +10,8 @@ namespace Netnr.Func
     /// </summary>
     public class MailAid
     {
+        private static ILog log;
+
         /// <summary>
         /// 发送邮件
         /// </summary>
@@ -42,6 +45,7 @@ namespace Netnr.Func
             }
             catch (Exception ex)
             {
+                log.Error(ex.Message);
                 vm.Set(ex);
             }
 
