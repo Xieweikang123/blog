@@ -3,6 +3,10 @@ using log4net.Config;
 using log4net.Repository;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Netnr.Web
 {
@@ -10,6 +14,7 @@ namespace Netnr.Web
     {
         public static void Main(string[] args)
         {
+
             CreateHostBuilder(args).Build().Run();
         }
 

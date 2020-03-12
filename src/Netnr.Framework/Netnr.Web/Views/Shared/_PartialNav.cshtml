@@ -47,7 +47,11 @@
                     </a>
                 </li>
                 <li>
-                    <a><span class="fa fa-fw fa-user-circle-o "></span><span class="indicator fa fa-sort-desc"></span></a>
+                    <a>
+                        @*<span class="fa fa-fw "></span>*@
+                        <img src="~/gs/static/avatar/@uinfo.UserPhoto" style="width:22px;" />
+                        <span class="indicator fa fa-sort-desc"></span>
+                    </a>
                     <ul>
                         <li><a href="/user/id/@uinfo.UserId"><span class="fa fa-fw fa-user text-primary"></span> 我的主页</a></li>
                         <li><a href="/user/setting"><span class="fa fa-fw fa-cog text-primary"></span> 个人设置</a></li>

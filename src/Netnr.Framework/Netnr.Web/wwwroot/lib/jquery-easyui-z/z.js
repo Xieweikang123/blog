@@ -223,7 +223,7 @@
                     //点击排序
                     if (typeof that.onSortColumn != "function") {
 
-                        console.log("that:",that);
+                        console.log("that:", that);
                         that.onSortColumn = function (sort, order) {
 
                             console.log("click sort");
@@ -310,6 +310,7 @@
                             that.bind();
                         },
                         error: function (ex) {
+                            console.log("z.js error 313h: ", ex);
                             that.total = 0;
                             that.data = [];
                             //错误回调

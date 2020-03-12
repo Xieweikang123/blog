@@ -19,7 +19,7 @@ namespace Netnr.Fast
         {
             var listSort = sorts.Split(',').ToList();
             var listOrder = orders.Split(',').ToList();
-            
+
             //倒叙
             for (int i = listSort.Count - 1; i >= 0; i--)
             {
@@ -28,9 +28,9 @@ namespace Netnr.Fast
 
                 var property = typeof(T).GetProperties().Where(x => x.Name.ToLower() == sort.ToLower()).First();
 
-                var parameter = Expression.Parameter(typeof(T), "p");
-                var propertyAccess = Expression.MakeMemberAccess(parameter, property);
-                var lambda = Expression.Lambda(propertyAccess, parameter);
+                ParameterExpression parameter = Expression.Parameter(typeof(T), "p");
+                MemberExpression propertyAccess = Expression.MakeMemberAccess(parameter, property);
+                LambdaExpression lambda = Expression.Lambda(propertyAccess, parameter);
 
                 if (order.ToLower() == "desc")
                 {

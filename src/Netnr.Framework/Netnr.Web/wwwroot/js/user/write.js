@@ -2,8 +2,8 @@ var gd1 = z.Grid();
 gd1.url = "/user/writelist";
 gd1.autosizePid = "#PGrid1";
 gd1.pageSize = 100;
-gd1.multiSort = true;
-gd1.sortName = "UwId,UwCreateTime,UwUpdateTime";
+gd1.multiSort = false;
+gd1.sortName = "UwId";
 gd1.sortOrder = "asc";
 
 gd1.columns = [[
@@ -46,6 +46,7 @@ gd1.load();
 //搜索
 $('#txtSearch').keydown(function (e) {
     e = e || window.event;
+    //回车
     if (e.keyCode == 13) {
         $('#btnSearch')[0].click();
     }
