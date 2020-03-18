@@ -56,6 +56,26 @@ namespace Netnr.Func
             }
             return lt;
         }
+       /// <summary>
+       /// 添加一个标签
+       /// </summary>
+       /// <param name="tagName">标签名</param>
+       /// <returns></returns>
+        public static bool AddTag(string tagName)
+        {
+            using var db = new ContextBase();
+            //标签是否已经存在
+            var sameTagNames= db.Tags.Where(x => x.TagName == tagName);
+           //存在
+            if (sameTagNames != null)
+            {
+                return false;
+            }
+            var newTag = new Tags() { TagName=tagName};
+            db.Tags.Add(newTag);
+
+            return db.SaveChanges()>0;
+        }
 
         /// <summary>
         /// 获取文章标签统计
@@ -103,7 +123,7 @@ namespace Netnr.Func
             var pag = new PaginationVM
             {
                 PageNumber = Math.Max(page, 1),
-                PageSize = 20
+                PageSize = 5
             };
 
             var dicQs = new Dictionary<string, string>

@@ -150,6 +150,7 @@ namespace Netnr.Web.Controllers
         {
             var isRemember = remember == 1;
             var vm = ValidateLogin(ValidateloginType.local, mo, isRemember);
+           
             if (vm.code == 200)
             {
                 var rurl = Request.Cookies["ReturnUrl"];
