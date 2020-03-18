@@ -74,11 +74,14 @@ $('#btnSave').click(function () {
         },
         dataType: 'json',
         success: function (data) {
+            console.log("success");
+            console.dir(data);
+
             if (data.code == 200) {
                 nmd.clear();
                 location.href = "/home/list/" + data.data;
             } else {
-                jz.msg(data.data);
+                jz.msg(data.msg);
             }
         },
         error: function (ex) {
@@ -89,6 +92,7 @@ $('#btnSave').click(function () {
             }
         },
         complete: function () {
+
             $('#btnSave')[0].disabled = false;
         }
     });

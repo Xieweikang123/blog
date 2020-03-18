@@ -25,6 +25,13 @@
             <param name="FirtCache">默认取缓存</param>
             <returns></returns>
         </member>
+        <member name="M:Netnr.Func.Common.AddTag(System.String)">
+            <summary>
+            添加一个标签
+            </summary>
+            <param name="tagName">标签名</param>
+            <returns></returns>
+        </member>
         <member name="M:Netnr.Func.Common.UserWritingByTagCountQuery(System.Boolean)">
             <summary>
             获取文章标签统计

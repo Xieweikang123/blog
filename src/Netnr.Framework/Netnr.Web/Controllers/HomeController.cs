@@ -130,7 +130,7 @@ namespace Netnr.Web.Controllers
                 if (string.IsNullOrWhiteSpace(uinfo.Nickname))
                 {
                     vm.Set(ARTag.refuse);
-                    vm.msg = "请填写昵称后再操作";
+                    vm.msg = "请在个人设置里填写昵称后再操作";
 
                     return vm;
                 }
