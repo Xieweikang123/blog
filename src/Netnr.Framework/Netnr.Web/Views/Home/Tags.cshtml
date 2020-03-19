@@ -20,7 +20,7 @@
         </div>
     </div>
 </div>
-
+<script src="~/js/JSCore.js"></script>
 <script>
     $('#txtSearch').on('input', function () {
         var key = this.value.toLowerCase().trim();
@@ -32,4 +32,47 @@
             }
         })
     })
+
+    var txtSearch = document.getElementById("txtSearch");
+
+    // Execute a function when the user releases a key on the keyboard
+    txtSearch.addEventListener("keyup", function (event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            //console.log("点击了回车");
+            //回车增加标签
+
+            //TODO 空格
+            //是否有非法字符
+            if (illegalCharacter(txtSearch.value)) {
+                jz.msg("标签含有非法字符");
+                return;
+            }
+
+            $.ajax({
+                url: "/home/AddTags",
+                type: "post",
+                data: {
+                    newTag: txtSearch.value,
+                },
+                dataType: 'json',
+                success: function (data) {
+                    console.log("success");
+                    console.dir(data);
+
+                    jz.msg(data.msg);
+
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 2000);
+                },
+                error: function (ex) {
+                    jz.msg(ex.msg);
+                },
+                complete: function () {
+
+                }
+            });
+        }
+    });
 </script>

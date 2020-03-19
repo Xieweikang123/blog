@@ -73,6 +73,35 @@ namespace Netnr.Web.Controllers
 
             return View();
         }
+        /// <summary>
+        /// 增加标签
+        /// </summary>
+        /// <param name="newTag">标签</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResultVM AddTags(string newTag)
+        {
+
+            ActionResultVM vm = new ActionResultVM();
+
+            bool result = false;
+            try
+            {
+                result = Func.Common.AddTag(newTag);
+            }
+            catch (Exception ex)
+            {
+                vm.msg = ex.Message;
+            }
+
+            if (result)
+            {
+                vm.code = 200;
+                vm.msg = $"添加新标签 {newTag} 成功";
+            }
+
+            return vm;
+        }
 
         /// <summary>
         /// 写

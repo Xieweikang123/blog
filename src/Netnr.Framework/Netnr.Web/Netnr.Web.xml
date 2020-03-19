@@ -563,6 +563,13 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Netnr.Web.Controllers.HomeController.AddTags(System.String)">
+            <summary>
+            增加标签
+            </summary>
+            <param name="newTag">标签</param>
+            <returns></returns>
+        </member>
         <member name="M:Netnr.Web.Controllers.HomeController.Write">
             <summary>
             写

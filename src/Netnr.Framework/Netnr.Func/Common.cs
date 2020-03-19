@@ -52,7 +52,7 @@ namespace Netnr.Func
             {
                 using var db = new ContextBase();
                 lt = db.Tags.Where(x => x.TagStatus == 1).OrderByDescending(x => x.TagHot).ToList();
-                Core.CacheTo.Set("Table_Tags_List", lt, 300, false);
+                Core.CacheTo.Set("Table_Tags_List", lt, 2, false);
             }
             return lt;
         }
@@ -67,11 +67,11 @@ namespace Netnr.Func
             //标签是否已经存在
             var sameTagNames= db.Tags.Where(x => x.TagName == tagName);
            //存在
-            if (sameTagNames != null)
+            if (sameTagNames.FirstOrDefault() != null)
             {
                 return false;
             }
-            var newTag = new Tags() { TagName=tagName};
+            var newTag = new Tags() { TagName=tagName,TagStatus=1,TagHot=0};
             db.Tags.Add(newTag);
 
             return db.SaveChanges()>0;
