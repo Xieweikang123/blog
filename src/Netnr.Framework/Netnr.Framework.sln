@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netnr.Login", "Netnr.Login\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netnr.WeChat", "Netnr.WeChat\Netnr.WeChat.csproj", "{1E957671-8FD6-4828-8971-6C61522A7E80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Walker.Core", "Walker.Core\Walker.Core.csproj", "{E29E4E70-C6D2-407E-B41A-EBB2EF5E22FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Walker.Core", "Walker.Core\Walker.Core.csproj", "{E29E4E70-C6D2-407E-B41A-EBB2EF5E22FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
